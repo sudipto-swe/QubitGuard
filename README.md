@@ -1,6 +1,7 @@
 # QubitGuard: Automated Testing, Fault Localization, and Repair Framework for Quantum Programs
 
 [![CI](https://github.com/sudipto-swe/QubitGuard/actions/workflows/ci.yml/badge.svg)](https://github.com/sudipto-swe/QubitGuard/actions/workflows/ci.yml)
+[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue.svg)](https://sudipto-swe.github.io/QubitGuard/)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue.svg)](https://www.python.org/downloads/)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Qiskit 2.x](https://img.shields.io/badge/Qiskit-2.5.2-6929C4.svg)](https://qiskit.org/)
