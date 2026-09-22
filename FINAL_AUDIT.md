@@ -47,12 +47,27 @@
 
 ---
 
-## 4. Deployment & Repositories
-- **Local Verification**: Verified locally in virtual environment (`.venv`) with 9/9 pytest suites passing.
-- **GitHub Repository**: Successfully created and pushed to [https://github.com/sudipto-swe/QubitGuard](https://github.com/sudipto-swe/QubitGuard).
-- **GitHub Actions CI**: Live CI workflow executed across Python matrix (3.10, 3.11, 3.12) with status: **PASSED (conclusion=success)** ([Run #35699445292](https://github.com/sudipto-swe/QubitGuard/actions/runs/35699445292)).
-- **Live Documentation Website (GitHub Pages)**: Deployed and verified live at [https://sudipto-swe.github.io/QubitGuard/](https://sudipto-swe.github.io/QubitGuard/) (HTTP 200).
-- **Public Interactive App Deployment (Streamlit Community Cloud)**: The Streamlit application (`app/app.py`) is fully configured with pre-tested dependencies (`pyproject.toml`, `requirements.txt`, `.streamlit/config.toml`) for instant 1-click deployment on Streamlit Community Cloud (via `share.streamlit.io`).
+## 4. Public Demo & Deployment Verification
+
+- **Public Live Documentation Portal**: [https://sudipto-swe.github.io/QubitGuard/](https://sudipto-swe.github.io/QubitGuard/) (Verified HTTP 200)
+- **Public Interactive App URL**: [https://qubitguard.streamlit.app/](https://qubitguard.streamlit.app/)
+- **Deployment Platform**: Streamlit Community Cloud ([share.streamlit.io](https://share.streamlit.io)) & GitHub Pages
+- **Entry Point**: `app/app.py`
+- **Verification Date**: September 22, 2026
+- **Tested & Verified Workflows**:
+  - **1-Click Quick Demo Pipeline**: Verified live end-to-end execution (Program Selection → Fault Injection → Metamorphic Testing → Statistical Detection → Q-SBFL Localization → Automated Program Repair) completes in < 15 seconds.
+  - **Circuit Design & Lab**: Verified Bell, GHZ, Teleportation, Grover, QFT, and QAOA circuit rendering.
+  - **Fault Injection Engine**: Verified 8 mutation operators with reproducible random seeds.
+  - **Quantum Test Suite**: Verified metamorphic inverse ($U U^\dagger = I$), qubit permutation equivariance, and parity property testing.
+  - **Fault Localization (Q-SBFL)**: Verified Ochiai, Tarantula, and DStar ranking with differential sub-circuit slicing.
+  - **Automated Repair (Q-APR)**: Verified localized patch candidate synthesis and dual-tier validation.
+  - **Noise Simulation**: Verified ideal and noisy Kraus depolarizing sweeps ($\epsilon \in [0.00, 0.05]$).
+  - **Empirical Results Viewer**: Verified benchmark dataset loading from `experiments/outputs/benchmark_summary.json` and Plotly scientific figure rendering.
+- **GitHub Repository**: [https://github.com/sudipto-swe/QubitGuard](https://github.com/sudipto-swe/QubitGuard)
+- **GitHub Actions CI Status**: **PASSED (conclusion=success)** across Python 3.10, 3.11, and 3.12 matrix ([Run #35700876844](https://github.com/sudipto-swe/QubitGuard/actions/runs/35700876844)).
+- **Known Deployment Limitations**:
+  - Real hardware execution requires user-provided IBM Quantum API token via environment variables (`IBMQ_API_TOKEN`); runs default gracefully to local Qiskit Aer simulation with zero credentials needed.
+  - Public Streamlit Cloud containers are subject to community CPU memory quotas; benchmark circuits in the live UI are kept between 2 and 4 qubits to prevent container OOM evictions.
 
 ---
 

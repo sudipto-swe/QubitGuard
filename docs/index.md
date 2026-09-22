@@ -12,6 +12,13 @@ title: QubitGuard - Quantum Software Engineering Platform
 
 ---
 
+## 🚀 Live Demo & Interactive Application
+The QubitGuard interactive research dashboard is ready to launch:
+- **Streamlit Community Cloud Demo**: [https://qubitguard.streamlit.app/](https://qubitguard.streamlit.app/) *(or deploy directly via [share.streamlit.io](https://share.streamlit.io))*
+- **Deployment Guide**: [Production & Cloud Deployment Guide](deployment.md)
+
+---
+
 ## Overview
 QubitGuard is an open-source, research-oriented Quantum Software Engineering (QSE) framework that unites:
 - **Reproducible Fault Injection**: 8 mutation operators across 6 benchmark circuit families.

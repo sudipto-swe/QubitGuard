@@ -12,6 +12,16 @@ Developed as an academic research artifact, QubitGuard addresses the fundamental
 
 ---
 
+## 🚀 Live Interactive Demo
+Launch the live interactive web demo directly in your browser:
+* **Live Web App**: [Launch QubitGuard on Streamlit Community Cloud](https://qubitguard.streamlit.app/) *(or deploy with 1-click via [share.streamlit.io](https://share.streamlit.io))*
+* **Documentation Portal**: [https://sudipto-swe.github.io/QubitGuard/](https://sudipto-swe.github.io/QubitGuard/)
+* **Deployment Guide**: [`docs/deployment.md`](docs/deployment.md)
+
+> **Execution Note**: The live demo executes locally simulated circuits via **Qiskit Aer** with Kraus noise models and requires zero external credentials or paid quantum cloud accounts. Optional IBM Quantum physical hardware backend execution can be enabled via environment variables.
+
+---
+
 ## 🌟 Key Features
 
 * **Quantum Benchmark Suite**: Standard reference circuits covering maximum entanglement (Bell, GHZ-3q/4q), quantum communication (Teleportation-3q), structured search (Grover-2q), phase estimation (QFT-3q), and variational optimization (QAOA MaxCut-3q).
