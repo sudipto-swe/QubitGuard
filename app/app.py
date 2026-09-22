@@ -41,6 +41,14 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+def render_chart(fig: go.Figure) -> None:
+    """Safely render plotly figure across different Streamlit versions."""
+    try:
+        st.plotly_chart(fig, width="stretch")
+    except (TypeError, ValueError):
+        st.plotly_chart(fig, use_container_width=True)
+
+
 st.title("⚛️ QubitGuard: Automated Testing, Fault Localization & Repair for Quantum Programs")
 st.markdown(
     """
@@ -130,7 +138,7 @@ if page == "🚀 Quick Demo (1-Click Pipeline)":
             loc_res = localizer.localize_faults(mut_prog, reference_program=bell, actual_fault_index=rec.target_index)
 
             fig_loc = create_localization_ranking_chart([r.to_dict() for r in loc_res.rankings], actual_fault_idx=rec.target_index)
-            st.plotly_chart(fig_loc, use_container_width=True)
+            render_chart(fig_loc)
 
             col_l1, col_l2, col_l3 = st.columns(3)
             col_l1.metric("Top-1 Suspicious Gate", f"Gate #{loc_res.top_1_index}")
@@ -163,7 +171,7 @@ if page == "🚀 Quick Demo (1-Click Pipeline)":
                 res_cand.probabilities,
                 title="Basis Probability Distribution: Reference vs Injected Defect"
             )
-            st.plotly_chart(fig_dist, use_container_width=True)
+            render_chart(fig_dist)
             st.success("✅ Complete live pipeline demonstration finished in < 15 seconds.")
 
 # -------------------------------------------------------------
@@ -313,7 +321,7 @@ elif page == "3. Test Suite & Fault Detection":
             res_cand.probabilities,
             title=f"Distribution Comparison: Reference vs {target_to_test.name}"
         )
-        st.plotly_chart(fig_dist, use_container_width=True)
+        render_chart(fig_dist)
 
 # -------------------------------------------------------------
 # PAGE 4: QUANTUM FAULT LOCALIZATION (SBFL)
@@ -344,7 +352,7 @@ elif page == "4. Quantum Fault Localization (SBFL)":
                     [r.to_dict() for r in loc_res.rankings],
                     actual_fault_idx=rec.target_index if rec else None,
                 )
-                st.plotly_chart(fig_loc, use_container_width=True)
+                render_chart(fig_loc)
 
                 col_l1, col_l2, col_l3 = st.columns(3)
                 col_l1.metric("Top-1 Gate Index", f"#{loc_res.top_1_index}")
@@ -419,7 +427,7 @@ elif page == "6. Empirical Benchmark Results":
                 textposition="auto"
             ))
             fig2.update_layout(xaxis_title="Fault Operator", yaxis_title="Detection Rate (%)", template="plotly_white")
-            st.plotly_chart(fig2, use_container_width=True)
+            render_chart(fig2)
 
         st.markdown("---")
         st.subheader("RQ3: Sensitivity vs Noise Level")
