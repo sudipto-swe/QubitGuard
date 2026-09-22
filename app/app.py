@@ -37,18 +37,31 @@ st.markdown(
     """
 )
 
+import os
+import sys
+from pathlib import Path
+
+# Robust path resolution so app works regardless of invocation directory or cloud deployment
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT / "src") not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT / "src"))
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 # Sidebar Navigation
 st.sidebar.header("Navigation & Settings")
 page = st.sidebar.radio(
     "Select Module",
     [
+        "🚀 Quick Demo (1-Click Pipeline)",
         "1. Overview & Research",
         "2. Circuit & Fault Injection Lab",
         "3. Test Suite & Fault Detection",
         "4. Quantum Fault Localization (SBFL)",
         "5. Automated Program Repair (APR)",
         "6. Empirical Benchmark Results",
-    ]
+    ],
+    index=0
 )
 
 benchmarks = get_all_benchmarks()
@@ -62,9 +75,100 @@ if "mutation_record" not in st.session_state:
     st.session_state.mutation_record = None
 
 # -------------------------------------------------------------
+# PAGE 0: 🚀 QUICK DEMO (1-CLICK PIPELINE)
+# -------------------------------------------------------------
+if page == "🚀 Quick Demo (1-Click Pipeline)":
+    st.header("🚀 1-Click End-to-End Demonstration")
+    st.markdown(
+        """
+        *Designed for researchers, evaluators, and reviewers to inspect the complete pipeline 
+        in seconds without manual setup: Program Selection → Fault Injection → Metamorphic Testing 
+        → Statistical Detection → Q-SBFL Localization → Automated Program Repair.*
+        """
+    )
+
+    col_btn1, col_btn2 = st.columns([1, 2])
+    with col_btn1:
+        run_demo = st.button("🚀 Run Live End-to-End Experiment", type="primary")
+
+    if run_demo:
+        with st.spinner("Executing live end-to-end quantum analysis pipeline..."):
+            # Step 1: Select compact benchmark
+            bell = benchmarks["Bell_State"]
+            st.success(f"1. Selected Benchmark Circuit: **{bell.name}** (2 qubits, depth {bell.depth})")
+
+            # Step 2: Inject representative fault
+            inj = FaultInjector(seed=42)
+            mut_prog, rec = inj.inject_fault(bell, FaultType.WRONG_GATE, target_index=0)
+            st.warning(f"2. Injected Fault: **{rec.description}**")
+
+            col_c1, col_c2 = st.columns(2)
+            with col_c1:
+                st.subheader("Original Circuit")
+                st.text(bell.circuit.draw(output="text"))
+            with col_c2:
+                st.subheader("Faulty (Mutated) Circuit")
+                st.text(mut_prog.circuit.draw(output="text"))
+
+            # Step 3: Metamorphic & Property Testing
+            executor = CircuitExecutor(default_shots=1024, default_seed=42)
+            generator = QuantumTestGenerator(executor=executor)
+            report = generator.run_suite(mut_prog, reference_program=bell)
+
+            st.markdown("---")
+            st.subheader("3. Test Suite & Fault Detection Outcome")
+            col_t1, col_t2, col_t3 = st.columns(3)
+            col_t1.metric("Tests Executed", report.total_tests)
+            col_t2.metric("Tests Passed", f"{report.passed_tests}/{report.total_tests}")
+            col_t3.metric("Bug Detected?", "YES (DEFECT DETECTED)" if report.is_fault_detected else "NO")
+
+            # Step 4: Q-SBFL Localization
+            st.markdown("---")
+            st.subheader("4. Quantum Spectrum-Based Fault Localization (Q-SBFL)")
+            localizer = FaultLocalizer(executor=executor, generator=generator)
+            loc_res = localizer.localize_faults(mut_prog, reference_program=bell, actual_fault_index=rec.target_index)
+
+            fig_loc = create_localization_ranking_chart([r.to_dict() for r in loc_res.rankings], actual_fault_idx=rec.target_index)
+            st.plotly_chart(fig_loc, use_container_width=True)
+
+            col_l1, col_l2, col_l3 = st.columns(3)
+            col_l1.metric("Top-1 Suspicious Gate", f"Gate #{loc_res.top_1_index}")
+            col_l2.metric("Top-3 Suspicious Gates", str(loc_res.top_3_indices))
+            col_l3.metric("Actual Bug Rank", f"Rank #{loc_res.rank_of_actual_fault}")
+
+            # Step 5: Automated Program Repair
+            st.markdown("---")
+            st.subheader("5. Automated Quantum Program Repair (Q-APR)")
+            repairer = QuantumProgramRepairer(executor=executor, generator=generator, localizer=localizer, max_evaluations=15, seed=42)
+            rep_report = repairer.repair(mut_prog, reference_program=bell)
+
+            col_r1, col_r2, col_r3 = st.columns(3)
+            col_r1.metric("Repair Outcome", "SUCCESS" if rep_report.repair_successful else "FAILED")
+            col_r2.metric("Candidates Evaluated", rep_report.total_candidates_evaluated)
+            col_r3.metric("Synthesis Time", f"{rep_report.search_time_sec:.2f}s")
+
+            if rep_report.best_patch:
+                st.success(f"Best Validated Patch: **{rep_report.best_patch.description}** (Fitness: {rep_report.best_patch.fitness_score:.3f})")
+                st.subheader("Repaired Circuit Diagram")
+                st.text(rep_report.best_patch.repaired_program.circuit.draw(output="text"))
+
+            # Step 6: Distribution Comparison
+            st.markdown("---")
+            st.subheader("6. Live Probability Distribution Comparison")
+            res_ref = executor.run(bell, shots=1024)
+            res_cand = executor.run(mut_prog, shots=1024)
+            fig_dist = create_distribution_comparison_chart(
+                res_ref.probabilities,
+                res_cand.probabilities,
+                title="Basis Probability Distribution: Reference vs Injected Defect"
+            )
+            st.plotly_chart(fig_dist, use_container_width=True)
+            st.success("✅ Complete live pipeline demonstration finished in < 15 seconds.")
+
+# -------------------------------------------------------------
 # PAGE 1: OVERVIEW & RESEARCH
 # -------------------------------------------------------------
-if page == "1. Overview & Research":
+elif page == "1. Overview & Research":
     st.header("Project Overview & Research Questions")
     col1, col2 = st.columns([2, 1])
 
@@ -289,8 +393,7 @@ elif page == "5. Automated Program Repair (APR)":
 elif page == "6. Empirical Benchmark Results":
     st.header("Empirical Benchmark Results & Research Answers")
 
-    from pathlib import Path
-    summary_file = Path("experiments/outputs/benchmark_summary.json")
+    summary_file = PROJECT_ROOT / "experiments" / "outputs" / "benchmark_summary.json"
     if summary_file.exists():
         with open(summary_file, "r") as f:
             summary = json.load(f)
