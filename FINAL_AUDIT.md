@@ -51,7 +51,8 @@
 - **Local Verification**: Verified locally in virtual environment (`.venv`) with 9/9 pytest suites passing.
 - **GitHub Repository**: Successfully created and pushed to [https://github.com/sudipto-swe/QubitGuard](https://github.com/sudipto-swe/QubitGuard).
 - **GitHub Actions CI**: Live CI workflow executed across Python matrix (3.10, 3.11, 3.12) with status: **PASSED (conclusion=success)** ([Run #35699445292](https://github.com/sudipto-swe/QubitGuard/actions/runs/35699445292)).
-- **Public Streamlit Deployment**: The Streamlit application (`app/app.py`) is fully configured for one-click deployment on Streamlit Community Cloud (via `share.streamlit.io`).
+- **Live Documentation Website (GitHub Pages)**: Deployed and verified live at [https://sudipto-swe.github.io/QubitGuard/](https://sudipto-swe.github.io/QubitGuard/) (HTTP 200).
+- **Public Interactive App Deployment (Streamlit Community Cloud)**: The Streamlit application (`app/app.py`) is fully configured with pre-tested dependencies (`pyproject.toml`, `requirements.txt`, `.streamlit/config.toml`) for instant 1-click deployment on Streamlit Community Cloud (via `share.streamlit.io`).
 
 ---
 
