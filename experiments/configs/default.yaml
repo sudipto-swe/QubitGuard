@@ -1,0 +1,26 @@
+experiment_name: "qubitguard_evaluation_standard"
+seed: 42
+shots: 1024
+circuits:
+  - "Bell_State"
+  - "GHZ_3q"
+  - "Teleportation_3q"
+  - "Grover_2q"
+  - "QFT_3q"
+  - "QAOA_MaxCut_3q"
+fault_types:
+  - "GATE_OMISSION"
+  - "WRONG_GATE"
+  - "WRONG_QUBIT"
+  - "PARAMETER_PERTURBATION"
+  - "GATE_ORDER_SWAP"
+  - "MEASUREMENT_MUTATION"
+  - "CONTROLLED_OPERATION"
+  - "REDUNDANT_GATE"
+noise_levels:
+  - 0.00
+  - 0.01
+  - 0.02
+  - 0.05
+num_mutations_per_config: 2
+output_dir: "experiments/outputs"

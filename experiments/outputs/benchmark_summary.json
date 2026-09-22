@@ -1,0 +1,67 @@
+{
+  "RQ1_overall_detection": {
+    "total_mutants": 176,
+    "detected_mutants": 129,
+    "mutation_score": 0.733,
+    "precision": 0.9847,
+    "recall": 0.733,
+    "f1_score": 0.8404
+  },
+  "RQ2_detection_by_fault_class": {
+    "CONTROLLED_OPERATION": 0.875,
+    "GATE_OMISSION": 0.75,
+    "GATE_ORDER_SWAP": 0.6667,
+    "MEASUREMENT_MUTATION": 0.6667,
+    "PARAMETER_PERTURBATION": 0.5,
+    "REDUNDANT_GATE": 0.5833,
+    "WRONG_GATE": 0.8333,
+    "WRONG_QUBIT": 0.8333
+  },
+  "RQ3_noise_impact": {
+    "0.0": {
+      "total_mutants": 44,
+      "detected_mutants": 33,
+      "mutation_score": 0.75,
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1_score": 0.8571
+    },
+    "0.01": {
+      "total_mutants": 44,
+      "detected_mutants": 33,
+      "mutation_score": 0.75,
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1_score": 0.8571
+    },
+    "0.02": {
+      "total_mutants": 44,
+      "detected_mutants": 32,
+      "mutation_score": 0.7273,
+      "precision": 0.9697,
+      "recall": 0.7273,
+      "f1_score": 0.8312
+    },
+    "0.05": {
+      "total_mutants": 44,
+      "detected_mutants": 31,
+      "mutation_score": 0.7045,
+      "precision": 0.9688,
+      "recall": 0.7045,
+      "f1_score": 0.8158
+    }
+  },
+  "RQ4_localization": {
+    "total_evaluations": 66,
+    "top_1_accuracy": 0.4394,
+    "top_3_accuracy": 0.697,
+    "mean_first_rank": 3.42,
+    "mean_exam_score": 0.3179
+  },
+  "RQ5_repair": {
+    "total_repair_tasks": 6,
+    "repair_success_rate": 0.5,
+    "avg_candidates_evaluated": 11.7,
+    "avg_search_time_sec": 16.09
+  }
+}

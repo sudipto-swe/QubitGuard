@@ -1,0 +1,7 @@
+circuit,fault_type,candidates_evaluated,test_adequate_patches,validated_patches,repair_successful,search_time_sec
+Bell_State,GATE_OMISSION,4,0,0,0,7.076986652000414
+Bell_State,WRONG_GATE,10,1,1,1,14.612839659999736
+GHZ_3q,GATE_OMISSION,10,0,0,0,20.561094606999177
+GHZ_3q,WRONG_GATE,14,1,1,1,22.29290934999881
+Grover_2q,GATE_OMISSION,16,0,0,0,17.304997666999043
+Grover_2q,WRONG_GATE,16,1,1,1,14.715885556001012
