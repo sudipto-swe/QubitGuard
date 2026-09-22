@@ -1,0 +1,76 @@
+\documentclass[10pt,journal,compsoc]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\title{QubitGuard: Automated Testing, Spectrum-Based Fault Localization, and Program Repair for Quantum Circuits}
+
+\author{Sudipto~Biswas
+\thanks{S. Biswas is with the Department of Computer Science and Engineering. Contact: sudiptoswe@gmail.com.}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+As quantum algorithms transition from theoretical formulations to physical execution on Noisy Intermediate-Scale Quantum (NISQ) devices, ensuring the correctness and reliability of quantum software has become paramount. Testing quantum programs is uniquely constrained by the no-cloning theorem, wavefunction collapse upon measurement, the oracle problem, and environmental decoherence. In this paper, we present \textbf{QubitGuard}, an open-source, reproducible quantum software engineering framework for automated fault injection, metamorphic and property-based testing, quantum spectrum-based fault localization (Q-SBFL), and automated program repair (Q-APR). We define a systematic taxonomy of eight quantum mutation operators and evaluate their detection under both ideal and noisy simulation. We formulate a blended Q-SBFL metric combining Ochiai spectra with differential sub-circuit slicing to isolate faulty gates, and deploy a heuristic search repair engine that synthesizes test-adequate and validated patches. We empirically evaluate QubitGuard across six benchmark circuits (Bell, GHZ, Teleportation, Grover, QFT, QAOA) addressing five research questions. Our findings demonstrate that metamorphic inverse and equivariance assertions detect semantic faults with high precision while noise-calibrated divergence thresholding prevents false alarms up to $\epsilon=0.05$ depolarizing error rates.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Quantum Software Engineering, Quantum Program Testing, Fault Localization, Automated Program Repair, Metamorphic Testing.
+\end{IEEEkeywords}
+
+\section{Introduction}
+Quantum computing promises exponential computational speedups for problems in cryptography, quantum chemistry, and combinatorial optimization. However, developing error-free quantum programs is exceptionally challenging. Programmers must compose unitaries and entangling gates under strict physical constraints.
+
+Unlike classical software, quantum software testing faces three fundamental barriers:
+\begin{enumerate}
+    \item \textbf{Wavefunction Collapse \& No-Cloning:} Intermediate quantum state inspection is impossible without collapsing superposition.
+    \item \textbf{The Test Oracle Problem:} For complex quantum algorithms, determining exact analytical probability distributions is often intractable.
+    \item \textbf{Environmental Noise Confounding:} Hardware decoherence and gate infidelities produce stochastic deviations that are indistinguishable from algorithmic bugs without noise-calibrated statistical tests.
+\end{enumerate}
+
+To bridge this gap, we present \textbf{QubitGuard}, an integrated research framework that automates the lifecycle of quantum program quality assurance.
+
+\section{System Architecture \& Methodology}
+\subsection{Fault Injection Taxonomy}
+QubitGuard establishes eight reproducible quantum mutation operators:
+\begin{itemize}
+    \item Gate Omission ($O_{gom}$)
+    \item Wrong Gate Substitution ($O_{wg}$)
+    \item Wrong Qubit Retargeting ($O_{wq}$)
+    \item Parameter Perturbation ($O_{pp}$)
+    \item Gate Order Inversion ($O_{gos}$)
+    \item Measurement Redirection ($O_{mm}$)
+    \item Controlled Operation Conversion ($O_{co}$)
+    \item Redundant Identity/Pauli Gate Insertion ($O_{rg}$)
+\end{itemize}
+
+\subsection{Quantum Spectrum-Based Fault Localization (Q-SBFL)}
+In classical SBFL, coverage traces identify failing execution paths. In quantum circuits, all gates along a computational path execute concurrently. QubitGuard introduces sub-circuit differential slicing to measure output Total Variation Distance (TVD) shift upon gate removal, combined with Ochiai suspicion ranking:
+\begin{equation}
+    S_{Ochiai}(g) = \frac{n_{cf}(g)}{\sqrt{(n_{cf}(g) + n_{uf}(g)) \cdot (n_{cf}(g) + n_{cs}(g))}}
+\end{equation}
+
+\subsection{Automated Program Repair (Q-APR)}
+Candidate patches are generated targeting high-suspicion gate locations. Each candidate undergoes dual validation: (1) test-suite adequacy across metamorphic relations, and (2) holdout distribution fidelity checking to prevent patch overfitting.
+
+\section{Empirical Evaluation}
+The framework was evaluated on six quantum benchmarks under depolarizing noise levels $\epsilon \in \{0.00, 0.01, 0.02, 0.05\}$. Complete reproducible datasets and code are made publicly available.
+
+\section{Threats to Validity}
+Threats include simulator abstraction fidelity compared to real transmon drift, benchmark circuit scale limitations, and finite shot sampling variance.
+
+\section{Conclusion}
+QubitGuard demonstrates that integrating metamorphic testing with differential Q-SBFL and guided repair provides a credible, reproducible foundation for quantum software reliability.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}
