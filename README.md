@@ -15,7 +15,7 @@ Developed as an academic research artifact, QubitGuard addresses the fundamental
 
 ## 🚀 Live Interactive Demo
 Launch the live interactive web demo directly in your browser:
-* **Live Web App**: (https://sudipto-swe-qubitguard-appapp-hhxxvj.streamlit.app/)
+* **Live Web App**: https://sudipto-swe-qubitguard-appapp-hhxxvj.streamlit.app/
 * **Documentation Portal**: [https://sudipto-swe.github.io/QubitGuard/](https://sudipto-swe.github.io/QubitGuard/)
 * **Deployment Guide**: [`docs/deployment.md`](docs/deployment.md)
 
