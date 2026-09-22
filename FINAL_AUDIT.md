@@ -48,9 +48,10 @@
 ---
 
 ## 4. Deployment & Repositories
-- **Local Verification**: Verified locally in virtual environment (`.venv`).
-- **GitHub Status**: Local git repository fully initialized with clean semantic commits on `main`. Push to remote (`https://github.com/sudiptob1/QubitGuard.git`) is configured and ready once GitHub access or personal access token is provided.
-- **Public Streamlit Deployment**: The Streamlit application is designed and ready for one-click deployment on Streamlit Community Cloud (via `app/app.py`).
+- **Local Verification**: Verified locally in virtual environment (`.venv`) with 9/9 pytest suites passing.
+- **GitHub Repository**: Successfully created and pushed to [https://github.com/sudipto-swe/QubitGuard](https://github.com/sudipto-swe/QubitGuard).
+- **GitHub Actions CI**: Live CI workflow executed across Python matrix (3.10, 3.11, 3.12) with status: **PASSED (conclusion=success)** ([Run #35699445292](https://github.com/sudipto-swe/QubitGuard/actions/runs/35699445292)).
+- **Public Streamlit Deployment**: The Streamlit application (`app/app.py`) is fully configured for one-click deployment on Streamlit Community Cloud (via `share.streamlit.io`).
 
 ---
 
