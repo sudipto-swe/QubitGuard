@@ -175,7 +175,7 @@ elif page == "1. Overview & Research":
 
     with col1:
         st.markdown(
-            """
+            r"""
             ### Research Motivation
             Quantum computing systems are inherently susceptible to both physical decoherence and subtle software design defects.
             Conventional testing frameworks fail in quantum domains due to:
