@@ -1,6 +1,6 @@
 # QubitGuard: Automated Testing, Fault Localization, and Repair Framework for Quantum Programs
 
-[![CI](https://github.com/sudiptob1/QubitGuard/actions/workflows/ci.yml/badge.svg)](https://github.com/sudiptob1/QubitGuard/actions/workflows/ci.yml)
+[![CI](https://github.com/sudipto-swe/QubitGuard/actions/workflows/ci.yml/badge.svg)](https://github.com/sudipto-swe/QubitGuard/actions/workflows/ci.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue.svg)](https://www.python.org/downloads/)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Qiskit 2.x](https://img.shields.io/badge/Qiskit-2.5.2-6929C4.svg)](https://qiskit.org/)
@@ -65,7 +65,7 @@ Evaluation conducted across **200 circuit executions** over 6 benchmark families
 ### 1. Installation
 ```bash
 # Clone the repository
-git clone https://github.com/sudiptob1/QubitGuard.git
+git clone https://github.com/sudipto-swe/QubitGuard.git
 cd QubitGuard
 
 # Create virtual environment
@@ -138,7 +138,7 @@ If you use QubitGuard in academic work, please cite:
   author = {Biswas, Sudipto},
   title  = {QubitGuard: Automated Testing, Fault Localization, and Repair Framework for Quantum Programs},
   year   = {2026},
-  url    = {https://github.com/sudiptob1/QubitGuard}
+  url    = {https://github.com/sudipto-swe/QubitGuard}
 }
 ```
 
